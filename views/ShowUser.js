@@ -1,4 +1,4 @@
-import Router       from '../Utlis/Router.js'
+
 import SendRequest from '../Utlis/SendRequest.js'
 
 let ShowUsers = {
@@ -8,6 +8,7 @@ let ShowUsers = {
                 <p> ${user.id} <p>
                 <p> ${user.username} <p>
                 <p> ${user.email} <p>
+                <a href= "#/users">BACK</a>
             `
         return view;
     }

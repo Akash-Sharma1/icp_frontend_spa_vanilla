@@ -30,10 +30,10 @@ let NewInterview = {
     }
     , after_render: async () => {
         document.getElementById("newinterviewbutton").addEventListener ("click",  async () => {
-            let startTime       = document.getElementById("startTime").value;
-            let endTime        = document.getElementById("endTime").value;
-            let options  = document.getElementById("user_ids").selectedOptions;
-            let user_ids = [];
+            let startTime  = document.getElementById("startTime").value;
+            let endTime    = document.getElementById("endTime").value;
+            let options    = document.getElementById("user_ids").selectedOptions;
+            let user_ids   = [];
             for(let i=0;i<options.length;i++)
                 user_ids.push(options[i].value);
             

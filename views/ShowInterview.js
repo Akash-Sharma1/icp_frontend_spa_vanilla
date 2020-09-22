@@ -1,4 +1,3 @@
-import Router       from '../Utlis/Router.js'
 import SendRequest from '../Utlis/SendRequest.js'
 
 let ShowInterview = {
@@ -18,6 +17,7 @@ let ShowInterview = {
                 </tr>
                 `).join('\n')}
             </table>
+            <a href= "#/interviews">BACK</a>
             `
         return view
     }

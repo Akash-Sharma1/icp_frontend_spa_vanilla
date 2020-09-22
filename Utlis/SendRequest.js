@@ -1,6 +1,7 @@
 const SendRequest = {
     send : async (url, method, data = null) => {
         data = data ? data : {};
+        
         const getoptions = {
             method: method,
             headers: {
@@ -21,7 +22,7 @@ const SendRequest = {
             // console.log(json);
             return json
         } catch (err) {
-            alert(err);
+            // alert(err);
             return err;
         }
     }

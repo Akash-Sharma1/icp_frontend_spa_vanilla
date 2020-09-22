@@ -1,5 +1,5 @@
 import SendRequest       from '../Utlis/SendRequest.js'
-import Router       from '../Utlis/Router.js'
+import Router            from '../Utlis/Router.js'
 
 let Interviews = {
     render : async () => {
