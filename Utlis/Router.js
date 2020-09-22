@@ -1,14 +1,23 @@
 const Router = {
     RouteToComponent : {},
+    WordToRoute: {},
     mainDiv : "app",
-    addRoute : (path, view) => {
+    addRoute : (path, view, word) => {
         Router.RouteToComponent[path] = view
+        Router.WordToRoute[word] = '#'+path
     },
     removeRoute : (path) => {
         Router.RouteToComponent[path] = null
     },
     getRoute : (path) => {
         return  Router.RouteToComponent[path];
+    },
+    getpath : (word, passed = {}) => {
+        let Path = Router.WordToRoute[word];
+        for (var key in passed) {
+            Path = Path.replace(":"+key, ""+passed[key])
+        }
+        return Path;
     },
     parseRequestURL : () => {
 
@@ -36,6 +45,11 @@ const Router = {
         
         page_content.innerHTML = await page.render(request.id)
         await page.after_render()
+    },
+    redirect : (word, passed = {}) => {
+        let Path = Router.getpath(word,passed);
+        location.replace(Path);
+        Router.renderpage();
     }
 }
 export default Router;

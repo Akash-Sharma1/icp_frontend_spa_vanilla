@@ -1,3 +1,4 @@
+import Router            from '../Utlis/Router.js'
 import SendRequest from '../Utlis/SendRequest.js'
 
 let NewUser = {
@@ -25,26 +26,26 @@ let NewUser = {
                 Resume
                     <input type="file" class="form-control-file" id="resume" name="resume">
             </div>
-            <button type="button" id="edituserbutton">CREATE</button>
+            <button type="button" id="edituserbutton" user_id = "${user.id}">EDIT</button>
             
-            <a href= "#/users">BACK</a>
+            <a href=  ${Router.getpath("Users")}>BACK</a>
         <form>
         `
     }
     , after_render: async () => {
-        document.getElementById("edituserbutton").addEventListener ("click",  () => {
+        document.getElementById("edituserbutton").addEventListener ("click",  async (e) => {
             let username       = document.getElementById("username").value;
             let usertype       = document.getElementById("username").value;
             let email          = document.getElementById("email").value;
             let resume         = document.getElementById("resume").value;
 
-            console.log(resume);
-            SendRequest.send('http://localhost:3000/users/',"PATCH", {
+            let response = await SendRequest.send('http://localhost:3000/users/'+e.path[0].attributes.user_id.value,"PATCH", {
                 "username" : username,
                 "email" : email,
                 "resume" : resume,
                 "usertype" : usertype
             })
+            Router.redirect("Users");
         })
     }
 }

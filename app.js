@@ -13,17 +13,16 @@ import ShowUser            from './views/ShowUser.js'
 import NewUser             from './views/NewUser.js'
 import EditUser            from './views/EditUser.js'
 
-
-Router.addRoute( '/notfound'             , Error404 )
-Router.addRoute( '/'                     , Interviews )
-Router.addRoute( '/interviews'           , Interviews )
-Router.addRoute( '/new_interview'      , NewInterview )
-Router.addRoute( '/interviews/:id'       , ShowInterview )
-Router.addRoute( '/edit_interview/:id' , EditInterview )
-Router.addRoute( '/users'               , Users )
-Router.addRoute( '/users/:id'        , ShowUser )
-Router.addRoute( '/new_user'        , NewUser )
-Router.addRoute( '/edit_user/:id'       , EditUser )
+Router.addRoute( '/notfound'             , Error404          ,"Error404")
+Router.addRoute( '/'                     , Interviews        ,"Interviews")
+Router.addRoute( '/interviews'           , Interviews        ,"Interviews")
+Router.addRoute( '/new_interview'        , NewInterview      ,"NewInterview")
+Router.addRoute( '/interviews/:id'       , ShowInterview     ,"ShowInterview")
+Router.addRoute( '/edit_interview/:id'   , EditInterview     ,"EditInterview")
+Router.addRoute( '/users'                , Users             ,"Users")
+Router.addRoute( '/users/:id'            , ShowUser          ,"ShowUser")
+Router.addRoute( '/new_user'             , NewUser           ,"NewUser")
+Router.addRoute( '/edit_user/:id'        , EditUser          ,"EditUser")
 
 window.addEventListener('hashchange', Router.renderpage);
 window.addEventListener('load', Router.renderpage);

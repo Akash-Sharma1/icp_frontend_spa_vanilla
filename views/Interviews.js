@@ -5,7 +5,7 @@ let Interviews = {
     render : async () => {
         let interviews = await SendRequest.send('http://localhost:3000/interviews/','GET');
         let view =  `
-        <a href= "#/new_interview">New interview</a>
+        <a href= ${Router.getpath("NewInterview")} >New interview</a>
         ${interviews.map(interview => 
             `<hr>
             <p><strong>Start Time: </strong> <a href= "#/interviews/${interview.id}">${interview.id}</a> </p>
@@ -22,9 +22,9 @@ let Interviews = {
                 `).join('\n')}
             </table>
             <p>
-                <a href="#/interviews/${interview.id}">View</a>
-                <a href="#/edit_interview/${interview.id}">edit</a>
-                <a href="#/interviews"  Name="deletebtns" interview_id=${interview.id} >delete</a>
+                <a href= ${Router.getpath("ShowInterview", {"id":interview.id} )} >View</a>
+                <a href= ${Router.getpath("EditInterview", {"id":interview.id} )}>edit</a>
+                <a href= ${Router.getpath("Interviews")} Name="deletebtns" interview_id=${interview.id} >delete</a>
             </p>
             `
         ).join('\n')}
@@ -37,7 +37,7 @@ let Interviews = {
         for(let i=0;i<elbynames.length;i++){
             elbynames[i].addEventListener ("click",  async (e) => {
                 let response = await SendRequest.send('http://localhost:3000/interviews/'+e.path[0].attributes.interview_id.value,'DELETE');
-                Router.renderpage();
+                Router.redirect("Interviews");
             })
         }
                     

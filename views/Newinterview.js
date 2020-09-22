@@ -1,3 +1,4 @@
+import Router            from '../Utlis/Router.js'
 import SendRequest       from '../Utlis/SendRequest.js'
 
 let NewInterview = {
@@ -24,7 +25,7 @@ let NewInterview = {
                 </select>
             </div>
             <button type="button" id="newinterviewbutton">CREATE</button>
-            <br/><a href="#/interviews">back</a>
+            <br/><a href= ${Router.getpath("Interviews")}>back</a>
         <form>
         `
     }
@@ -43,6 +44,7 @@ let NewInterview = {
                     "user_ids" : user_ids
             });
             console.log(response);
+            Router.redirect("Interviews");
         })
     }
 }
