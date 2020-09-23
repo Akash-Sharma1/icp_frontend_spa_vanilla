@@ -6,7 +6,7 @@ let NewUser = {
     render: async (id) => {
         let user = await SendRequest.send('http://localhost:3000/users/'+id,"GET");
         return `
-        <form>
+        <form id="edit_user_form" enctype="multipart/form-data"  user_id = "${user.id}">
             <div>
                 Username
                 <input type="text" class="form-control-file" id="username" name="username" value=${user.username}>
@@ -26,27 +26,31 @@ let NewUser = {
                 Resume
                     <input type="file" class="form-control-file" id="resume" name="resume">
             </div>
-            <button type="button" id="edituserbutton" user_id = "${user.id}">EDIT</button>
+            <button type="submit" >EDIT</button>
             
             <a href=  ${Router.getpath("Users")}>BACK</a>
         <form>
         `
     }
     , after_render: async () => {
-        document.getElementById("edituserbutton").addEventListener ("click",  async (e) => {
+        const edit_form = document.getElementById("edit_user_form")
+        edit_form.onsubmit = async (e) => {
+            
+            e.preventDefault();
             let username       = document.getElementById("username").value;
             let usertype       = document.getElementById("username").value;
             let email          = document.getElementById("email").value;
-            let resume         = document.getElementById("resume").value;
+            let resume         = document.getElementById("resume").files;
+            if(resume.length > 0) resume = resume[0];
 
-            let response = await SendRequest.send('http://localhost:3000/users/'+e.path[0].attributes.user_id.value,"PATCH", {
+            let response = await SendRequest.send('http://localhost:3000/users/'+e.path[0].attributes.user_id.value,"PATCH","POST", {
                 "username" : username,
                 "email" : email,
                 "resume" : resume,
                 "usertype" : usertype
             })
-            Router.redirect("Users");
-        })
+            // Router.redirect("Users");
+        }
     }
 }
 

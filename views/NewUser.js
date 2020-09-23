@@ -36,7 +36,8 @@ let NewUser = {
             let username       = document.getElementById("username").value;
             let usertype       = document.getElementById("username").value;
             let email          = document.getElementById("email").value;
-            let resume         = document.getElementById("resume").value;
+            let resume         = document.getElementById("resume").files;
+            if(resume.length > 0) resume = resume[0];
 
             let response = await SendRequest.send('http://localhost:3000/users/',"POST", {
                 "username" : username,

@@ -9,9 +9,10 @@ let users = {
             <table>
                 ${users.map(user =>`
                 <tr>
-                    <td> ${user.id} <td>
-                    <td> ${user.username} <td>
-                    <td> ${user.email} <td>
+                    <td> ${user.id} </td>
+                    <td> ${user.username} </td>
+                    <td> ${user.email} </td>
+                    <td> <a href="http://localhost:3000${user.resume}">Resume link</a> </td>
                     <td><a href= ${Router.getpath("ShowUser", {"id":user.id} )} >View User</a></td>
                     <td><a href= ${Router.getpath("EditUser", {"id":user.id} )} >Edit User</a></td>
                     <td><a href= ${Router.getpath("Users")} Name="deletebtns" user_id=${user.id}  >delete User</a></td>
