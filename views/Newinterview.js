@@ -44,7 +44,7 @@ let NewInterview = {
                     "user_ids" : user_ids
             });
             console.log(response);
-            Router.redirect("Interviews");
+            // Router.redirect("Interviews");
         })
     }
 }

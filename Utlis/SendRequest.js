@@ -19,10 +19,17 @@ const SendRequest = {
         try {
             const response = await fetch(url, options)
             const json = await response.json();
-            // console.log(json);
+            if(response.status != 200){
+                let errors = "";
+                for (var key in json) {
+                    for(let i=0;i<json[key].length;i++)
+                        errors += key +": " + json[key][i]+"\n";
+                }
+                alert(errors);
+            }
             return json
         } catch (err) {
-            // alert(err);
+            alert(err);
             return err;
         }
     }

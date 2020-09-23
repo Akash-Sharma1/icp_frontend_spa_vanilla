@@ -72,7 +72,7 @@ const Router = {
                     originalurl.splice(i,originalurl.length);
                 }
             }
-            console.log(foundurl ,originalurl);
+            //console.log(foundurl ,originalurl);
 
             if(originalurl.length != foundurl.length)continue;
 
@@ -81,7 +81,7 @@ const Router = {
             for(let i=0;i<foundurl.length;i++){
                 var data_patt = /^<[\w]+>:[\w]+/g;
                 var origmatch = originalurl[i].match(data_patt);
-                console.log(originalurl[i], origmatch);
+                //console.log(originalurl[i], origmatch);
     
                 if(origmatch){
                     origmatch = origmatch[0];
@@ -90,7 +90,7 @@ const Router = {
                     let variablename = x[1];
                     
                     let value = Router.checkdatatype(type ,foundurl[i]);
-                    console.log(type, variablename, origmatch, value);
+                    //console.log(type, variablename, origmatch, value);
 
                     if(!value){
                         matchingpath = null;
@@ -101,7 +101,7 @@ const Router = {
                     }
                 }
                 else if(originalurl[i] != foundurl[i]){
-                    console.log(originalurl[i] , foundurl[i]);
+                    //console.log(originalurl[i] , foundurl[i]);
                     matchingpath = null;
                     break;
                 }
@@ -118,7 +118,7 @@ const Router = {
         const page_content = null || document.getElementById(Router.mainDiv);
         
         let ParsedUrl = Router.parseUrl();
-        console.log(ParsedUrl);
+        //console.log(ParsedUrl);
         
         let page = Router.getRoute(ParsedUrl["path"]) ? Router.getRoute(ParsedUrl["path"]) : Router.getRoute('/notfound')
         
