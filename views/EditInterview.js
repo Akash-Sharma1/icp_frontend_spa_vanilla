@@ -3,7 +3,8 @@ import SendRequest       from '../Utlis/SendRequest.js'
 
 let EditInterview = {
 
-    render: async (id) => {
+    render: async (request) => {
+        let id = request["id"]
         let allUsers = await SendRequest.send('http://localhost:3000/users/',"GET");
         var interview = await SendRequest.send('http://localhost:3000/interviews/'+id,"GET");
         return `
@@ -24,7 +25,7 @@ let EditInterview = {
             <div>
                 Choose Users
                 <select multiple class="form-control" id="user_ids" name="user_ids">
-                    ${allUsers.map(user => `<option value=${user.id}>${user.username}</option>` )}
+                    ${allUsers.map(user => `<option value="${user.id}">${user.username}</option>` )}
                 </select>
             </div>
             <button type="button" id="editinterviewbutton" interview_id = "${interview.id}">Edit</button>

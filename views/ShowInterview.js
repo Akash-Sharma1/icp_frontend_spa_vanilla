@@ -1,7 +1,8 @@
 import SendRequest from '../Utlis/SendRequest.js'
 
 let ShowInterview = {
-    render : async (id) => {
+    render : async (request) => {
+        let id = request["id"]
         let interview =  await SendRequest.send('http://localhost:3000/interviews/'+id,'GET');
         let view = 
             `<hr>

@@ -3,7 +3,8 @@ import SendRequest from '../Utlis/SendRequest.js'
 
 let NewUser = {
 
-    render: async (id) => {
+    render: async (request) => {
+        let id = request["id"]
         let user = await SendRequest.send('http://localhost:3000/users/'+id,"GET");
         return `
         <form id="edit_user_form" enctype="multipart/form-data"  user_id = "${user.id}">
