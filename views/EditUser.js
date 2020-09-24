@@ -7,7 +7,7 @@ let NewUser = {
         let id = request["id"]
         let user = await SendRequest.send('http://localhost:3000/users/'+id,"GET");
         return `
-        <form id="edit_user_form" enctype="multipart/form-data"  user_id = "${user.id}">
+        <form id="edit_user_form" user_id = "${user.id}">
             <div>
                 Username
                 <input type="text" class="form-control-file" id="username" name="username" value=${user.username}>
@@ -34,23 +34,15 @@ let NewUser = {
         `
     }
     , after_render: async () => {
-        const edit_form = document.getElementById("edit_user_form")
-        edit_form.onsubmit = async (e) => {
-            
+        const edit_form = document.getElementById("edit_user_form");
+        edit_form.onsubmit =   async (e) => {
             e.preventDefault();
-            let username       = document.getElementById("username").value;
-            let usertype       = document.getElementById("username").value;
-            let email          = document.getElementById("email").value;
-            let resume         = document.getElementById("resume").files;
-            if(resume.length > 0) resume = resume[0];
+            const formData = new FormData(edit_form);
 
-            let response = await SendRequest.send('http://localhost:3000/users/'+e.path[0].attributes.user_id.value,"PATCH","POST", {
-                "username" : username,
-                "email" : email,
-                "resume" : resume,
-                "usertype" : usertype
-            })
-            // Router.redirect("Users");
+            let response = await SendRequest.send('http://localhost:3000/users/'+e.path[0].attributes.user_id.value,"PATCH", formData, "formdata");
+            let status = response.status;
+            if (status == 200 || status == 201)
+                Router.redirect("Users")
         }
     }
 }

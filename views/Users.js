@@ -27,7 +27,9 @@ let users = {
         for(let i=0;i<elbynames.length;i++){
             elbynames[i].addEventListener ("click",  async (e) => {
                 let response = await SendRequest.send('http://localhost:3000/users/'+e.path[0].attributes.user_id.value,'DELETE');
-                Router.redirect("Users");
+                let status = response.status;
+                if (status == 200 || status == 201)
+                    Router.redirect("Users");
             })
         }
           

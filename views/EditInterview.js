@@ -47,8 +47,9 @@ let EditInterview = {
                     "endTime" : endTime,
                     "user_ids" : user_ids
             });
-            console.log(response);
-            Router.redirect("Interviews");
+            let status = response.status;
+            if (status == 200 || status == 201)
+                Router.redirect("Interviews");
         })
     }
 }

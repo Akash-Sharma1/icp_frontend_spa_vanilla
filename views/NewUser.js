@@ -5,7 +5,7 @@ let NewUser = {
 
     render: async () => {
         return `
-        <form>
+        <form id="new_user_form">
             <div>
                 Username
                 <input type="text" class="form-control-file" id="username" name="username">
@@ -25,28 +25,23 @@ let NewUser = {
                 Resume
                     
             </div><input type="file" class="form-control-file" id="resume" name="resume">
-            <button type="button" id="newuserbutton">CREATE</button>
+            <button type="submit" id="newuserbutton">CREATE</button>
             
             <a href= "#/users">BACK</a>
         <form>
         `
     }
     , after_render: async () => {
-        document.getElementById("newuserbutton").addEventListener ("click",  async () => {
-            let username       = document.getElementById("username").value;
-            let usertype       = document.getElementById("username").value;
-            let email          = document.getElementById("email").value;
-            let resume         = document.getElementById("resume").files;
-            if(resume.length > 0) resume = resume[0];
+        const new_form = document.getElementById("new_user_form");
+        new_form.onsubmit =   async (e) => {
+            e.preventDefault();
+            const formData = new FormData(new_form);
 
-            let response = await SendRequest.send('http://localhost:3000/users/',"POST", {
-                "username" : username,
-                "email" : email,
-                "resume" : resume,
-                "usertype" : usertype
-            })
-            Router.redirect("Users")
-        })
+            let response = await SendRequest.send('http://localhost:3000/users/',"POST", formData, "formdata");
+            let status = response.status;
+            if (status == 200 || status == 201)
+                Router.redirect("Users")
+        }
     }
 }
 

@@ -37,7 +37,9 @@ let Interviews = {
         for(let i=0;i<elbynames.length;i++){
             elbynames[i].addEventListener ("click",  async (e) => {
                 let response = await SendRequest.send('http://localhost:3000/interviews/'+e.path[0].attributes.interview_id.value,'DELETE');
-                Router.redirect("Interviews");
+                let status = response.status;
+                if (status == 200 || status == 201)
+                    Router.redirect("Interviews");
             })
         }
                     
