@@ -1,10 +1,12 @@
+import Router            from '../Utlis/Router.js'
 import SendRequest       from '../Utlis/SendRequest.js'
 
 let EditInterview = {
 
-    render: async (id) => {
+    render: async (request) => {
+        let id = request["id"]
         let allUsers = await SendRequest.send('http://localhost:3000/users/',"GET");
-        var  interview = await SendRequest.send('http://localhost:3000/interviews/'+id,"GET");
+        var interview = await SendRequest.send('http://localhost:3000/interviews/'+id,"GET");
         return `
         <form>
             <div>
@@ -23,11 +25,11 @@ let EditInterview = {
             <div>
                 Choose Users
                 <select multiple class="form-control" id="user_ids" name="user_ids">
-                    ${allUsers.map(user => `<option value=${user.id}>${user.username}</option>` )}
+                    ${allUsers.map(user => `<option value="${user.id}">${user.username}</option>` )}
                 </select>
             </div>
             <button type="button" id="editinterviewbutton" interview_id = "${interview.id}">Edit</button>
-            <br/><a href="#/interviews">back</a>
+            <br/><a href= ${Router.getpath("Interviews")}>back</a>
         <form>
         `
     }
@@ -45,7 +47,9 @@ let EditInterview = {
                     "endTime" : endTime,
                     "user_ids" : user_ids
             });
-            console.log(response);
+            let status = response.status;
+            if (status == 200 || status == 201)
+                Router.redirect("Interviews");
         })
     }
 }

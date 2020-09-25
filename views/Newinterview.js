@@ -1,3 +1,4 @@
+import Router            from '../Utlis/Router.js'
 import SendRequest       from '../Utlis/SendRequest.js'
 
 let NewInterview = {
@@ -24,16 +25,16 @@ let NewInterview = {
                 </select>
             </div>
             <button type="button" id="newinterviewbutton">CREATE</button>
-            <br/><a href="#/interviews">back</a>
+            <br/><a href= ${Router.getpath("Interviews")}>back</a>
         <form>
         `
     }
     , after_render: async () => {
         document.getElementById("newinterviewbutton").addEventListener ("click",  async () => {
-            let startTime       = document.getElementById("startTime").value;
-            let endTime        = document.getElementById("endTime").value;
-            let options  = document.getElementById("user_ids").selectedOptions;
-            let user_ids = [];
+            let startTime  = document.getElementById("startTime").value;
+            let endTime    = document.getElementById("endTime").value;
+            let options    = document.getElementById("user_ids").selectedOptions;
+            let user_ids   = [];
             for(let i=0;i<options.length;i++)
                 user_ids.push(options[i].value);
             
@@ -42,7 +43,9 @@ let NewInterview = {
                     "endTime" : endTime,
                     "user_ids" : user_ids
             });
-            console.log(response);
+            let status = response.status;
+            if (status == 200 || status == 201)
+                Router.redirect("Interviews");
         })
     }
 }
